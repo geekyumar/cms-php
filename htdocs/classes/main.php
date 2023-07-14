@@ -13,5 +13,10 @@ function get_config($key)
     }
 }
 
+function load_template($name)
+{
+    include $_SERVER['DOCUMENT_ROOT']."/_templates/$name.html";
+}
+
 include_once 'database.class.php';
 include_once 'user.class.php';
