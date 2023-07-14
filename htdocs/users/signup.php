@@ -34,7 +34,14 @@ include_once ('/var/www/cms-php/htdocs/classes/main.php');
 <body class="">
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
-      <div class="col-12" id="nav">
+      <div class="col-12" id="signup-success" style="display:none">
+        <br>
+      <div class="alert alert-primary alert-dismissible text-white" role="alert">
+                <span class="text-sm">Signup Success! Click <a href="/users/login.php" class="alert-link text-white">here</a> to login.</span>
+                <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
       </div>
     </div>
   </div>
@@ -97,11 +104,11 @@ include_once ('/var/www/cms-php/htdocs/classes/main.php');
     </section>
   </main>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/assets/js/core/popper.min.js"></script>
+  <script src="/assets/js/core/bootstrap.min.js"></script>
+  <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -110,6 +117,8 @@ include_once ('/var/www/cms-php/htdocs/classes/main.php');
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+
+
   </script>
   
 <script>
@@ -142,16 +151,18 @@ include_once ('/var/www/cms-php/htdocs/classes/main.php');
       if(request.status === 200)
       {
         responseData = JSON.parse(request.responseText)
-        if(responseData['request'] == 'success')
+        if(responseData['response'] == 'success')
         {
-          alert('Signup Success!')
-        }
-        else{
-          alert('Signup Failed!')
+          success = document.getElementById('signup-success')
+          success.style.removeProperty('display')
+          setTimeout(function()
+          {
+            success.style.display = 'none'
+          }, 5000)
         }
       }
       else{
-        alert('Error: ',request.status)
+        alert('Signup Failed!')
       }
     }
     request.send(requestData)

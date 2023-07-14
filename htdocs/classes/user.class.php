@@ -11,8 +11,8 @@ class user
 
         $sql1 = "SET @@session.time_zone = '+05:30'";
 
-        $sql2 = "INSERT INTO `users` (`name`,`username`, `email`,`phone`,`reg_id`)
-    VALUES ('$name','$username', '$email', '$phone', '$regid')";
+        $sql2 = "INSERT INTO `users` (`name`,`username`, `email`,`phone`,`password`,`reg_id`)
+    VALUES ('$name','$username', '$email', '$phone', '$password', '$regid')";
 
        
 
@@ -30,7 +30,7 @@ class user
     {
         $conn = database::getConnection();
 
-        $sql = "SELECT * FROM `login` WHERE `username` = '$username'";
+        $sql = "SELECT * FROM `users` WHERE `username` = '$username' OR `email` = '$username'";
         $result = $conn->query($sql);
 
         if ($result->num_rows == 1) {

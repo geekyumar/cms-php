@@ -42,7 +42,14 @@
 <body class="bg-gray-200">
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
-      <div class="col-12">
+    <div class="col-12" id="login-success" style="display:none">
+        <br>
+      <div class="alert alert-primary alert-dismissible text-white" role="alert">
+                <span class="text-sm">Signup Success! Click <a href="/users/login.php" class="alert-link text-white">here</a> to login.</span>
+                <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
       </div>
     </div>
   </div>
@@ -63,14 +70,14 @@
                 <form role="form" class="text-start" id="myForm">
                   <div class="input-group input-group-outline my-3">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control">
+                    <input type="email" id="username" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control">
+                    <input type="password" id="password" class="form-control">
                   </div>
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                    <button type="button" onclick="login()"  class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                   </div>
                   <p class="mt-4 text-sm text-center">
                     Don't have an account?
@@ -117,11 +124,11 @@
     </div>
   </main>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/assets/js/core/popper.min.js"></script>
+  <script src="/assets/js/core/bootstrap.min.js"></script>
+  <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+
 
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -132,6 +139,40 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+
+  <script>
+    function login() { 
+    var username = document.getElementById('username').value
+    var password = document.getElementById('password').value
+
+    var request = new XMLHttpRequest();
+    request.open('POST', '/api/login.api.php', true)
+    request.setRequestHeader('Content-type', 'application/json')
+
+    var data = {
+      username:username,
+      password:password
+    }
+    requestData = JSON.stringify(data)
+
+    request.onload = function()
+    {
+      if(request.status === 200)
+      {
+        responseData = JSON.parse(request.responseText)
+        if(responseData['response'] == 'success')
+        {
+          window.location.href="/"
+        }
+      }
+      else{
+        alert("Login Failed!")
+      }
+    }
+    
+    request.send(requestData)
+  }
+    </script>
 
 
   <!-- Github buttons -->

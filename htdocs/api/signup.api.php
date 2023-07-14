@@ -2,7 +2,7 @@
 
 header('Content-Type: application/json');
 
-include_once ('/var/www/cms-php/htdocs/classes/main.php');
+include_once ($_SERVER['DOCUMENT_ROOT'].'/classes/main.php');
 
     $dataArray = file_get_contents('php://input');
     $data = json_decode($dataArray, true);
@@ -26,7 +26,7 @@ include_once ('/var/www/cms-php/htdocs/classes/main.php');
     if($result)
     {
             $success = array(
-                "request" => "success"
+                "response" => "success"
             );
             $jsonSuccess = json_encode($success);
             echo $jsonSuccess;

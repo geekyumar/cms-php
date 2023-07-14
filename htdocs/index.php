@@ -1082,6 +1082,8 @@
         },
       },
     });
+
+
   </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
