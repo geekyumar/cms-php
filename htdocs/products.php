@@ -12,7 +12,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Material Dashboard 2 by Creative Tim
+    Products - CMS
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -44,7 +44,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
           <h6 class="font-weight-bolder mb-0">Dashboard</h6>
         </nav>
             <li class="nav-item d-flex align-items-center">
-              <a href="../pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+              <a href="/profile" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none">Sign In</span>
               </a>
@@ -60,8 +60,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="d-flex justify-content-around bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-4">
-                <h5 class="text-white text-capitalize pt-2">Menu</h5>
-                <a class="btn bg-gradient-dark" href="javascript:;"><i class="material-icons">add</i>&nbsp;&nbsp;Add New Menu</a>
+                <h5 class="text-white text-capitalize pt-2">Products</h5>
+                <a class="btn bg-gradient-dark" href="javascript:;"><i class="material-icons">add</i>&nbsp;&nbsp;Add New Products</a>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
