@@ -12,7 +12,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
   <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <title>
-   Dashboard
+   Dashboard - CMS
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -172,7 +172,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                         <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -200,7 +200,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                         <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -228,7 +228,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                         <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -256,7 +256,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                         <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -284,7 +284,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                         <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -312,7 +312,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                         <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -325,7 +325,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
         </div>
       </div>
 
-  </script>
+      <script src="/assets/js/nav-highlight.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
