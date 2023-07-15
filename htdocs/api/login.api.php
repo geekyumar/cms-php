@@ -12,11 +12,18 @@ if(isset($data['username']) and
     $username = $data['username'];
     $password = $data['password'];
 
-    $result = user::login($username, $password);
+    $result = usersession::authenticate($username, $password);
     if($result)
     {
         $responseArray = [
             'response' => 'success'
+        ];
+        $response = json_encode($responseArray);
+        echo $response;
+    }
+    else{
+        $responseArray = [
+            'response' => 'failed'
         ];
         $response = json_encode($responseArray);
         echo $response;

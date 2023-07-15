@@ -26,7 +26,7 @@ class database
         }
         else
         {
-            echo "success";
+           return self::$conn;
         }
     }
 }

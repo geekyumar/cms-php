@@ -14,8 +14,6 @@ class user
         $sql2 = "INSERT INTO `users` (`name`,`username`, `email`,`phone`,`password`,`reg_id`)
     VALUES ('$name','$username', '$email', '$phone', '$password', '$regid')";
 
-       
-
         if ($conn->query($sql1) and $conn->query($sql2) === true) {
              return true;
             } 
@@ -39,12 +37,12 @@ class user
             if ($pass_verify === true) {
                 return true;
             } else {
-                die("Error 401: Invalid Credentials");
+                return false;
             }
 
         } else {
 
-            die("Error 401: Invalid Credentials");
+            return false;
 
         }
 
