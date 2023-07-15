@@ -60,7 +60,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="d-flex justify-content-around bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-4">
-                <h5 class="text-white text-capitalize pt-2">Pages</h5>
+                <h4 class="text-white text-capitalize pt-2">Pages</h4>
                 <a class="btn bg-gradient-dark" href="javascript:;"><i class="material-icons">add</i>&nbsp;&nbsp;Add New Pages</a>
               </div>
             </div>
