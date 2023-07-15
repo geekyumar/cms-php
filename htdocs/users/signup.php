@@ -1,9 +1,12 @@
 <?php
 
-include_once ('/var/www/cms-php/htdocs/classes/main.php');
+include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
+
+if (session::get('session_token')) {
+  header('Location: /');
+}
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,7 +89,7 @@ include_once ('/var/www/cms-php/htdocs/classes/main.php');
                       <input type="password" id="password" class="form-control">
                     </div>
                     <div class="text-center">
-                      <button type="button" onclick="signup()" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
+                      <button type="button" onclick="signup()" id="signup-button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
                     </div>
                   </form>
                 </div>
@@ -153,16 +156,22 @@ include_once ('/var/www/cms-php/htdocs/classes/main.php');
         responseData = JSON.parse(request.responseText)
         if(responseData['response'] == 'success')
         {
-          success = document.getElementById('signup-success')
-          success.style.removeProperty('display')
+          button = document.getElementById('signup-button')
+          button.classList.add('disabled')
           setTimeout(function()
           {
-            success.style.display = 'none'
-          }, 5000)
+          success = document.getElementById('signup-success')
+          success.style.removeProperty('display')
+          button.classList.remove('disabled')
+          }, 2000)
+          setTimeout(function()
+          {
+            success.style.display='none'
+          },5000)
         }
       }
       else{
-        alert('Signup Failed!')
+        alert('Signup Failed! Username or Phone already registered.')
       }
     }
     request.send(requestData)

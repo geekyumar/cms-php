@@ -2,6 +2,34 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
 
+if (session::get('session_token')) {
+
+  $session_token = session::get('session_token');
+  usersession::authorize($session_token);
+  usersession::isValid($session_token);
+  $id = session::get('user_id');
+  $userobj = new user($id);
+
+
+if (isset($_GET['signout'])) {
+
+  session::destroy();
+  header('Location:  /users/login');
+
+}
+
+if(isset($_GET['signout_all']))
+{
+user::signout_all($userobj->id);
+session::destroy();
+header('Location: /users/login');
+}
+
+}
+else{
+  header('Location: /users/login');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,11 +82,11 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Menu Link</label>
-                    <textarea type="text" id="menu-link" rows="8" class="form-control"></textarea>
+                    <input type="text" id="menu-link" rows="8" class="form-control">
                   </div>
 
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Create Menu</button>
+                    <button type="button" onclick="create()" class="btn bg-gradient-primary w-100 my-4 mb-2">Create Menu</button>
 </div>
                 </form>
               </div>
@@ -75,6 +103,46 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+
+<script>
+
+function create() { 
+    var menu_name = document.getElementById('menu-name').value
+    var menu_link = document.getElementById('menu-link').value
+
+    var request = new XMLHttpRequest();
+    request.open('POST', '/api/createmenu.api.php', true)
+    
+    request.setRequestHeader('Content-type', 'application/json')
+
+    var data = {
+      menu_name:menu_name,
+      menu_link:menu_link
+    }
+    requestData = JSON.stringify(data)
+
+    request.onload = function()
+    {
+      if(request.status === 200)
+      {
+        responseData = JSON.parse(request.responseText)
+        if(responseData['response'] == 'success')
+        {
+          alert("Menu Created!")
+        }
+        else{
+          alert("Create Menu Failed!")
+        } 
+      }
+      else{
+        alert("Create Menu Failed!")
+      }
+    }
+    
+    request.send(requestData)
+  }
+
+</script>
       <script src="/assets/js/core/popper.min.js"></script>
   <script src="/assets/js/core/bootstrap.min.js"></script>
   <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>

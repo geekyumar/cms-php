@@ -1,17 +1,11 @@
-<!--
-=========================================================
-* Material Dashboard 2 - v3.1.0
-=========================================================
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
+if (session::get('session_token')) {
+  header('Location: /');
+}
 
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,7 +71,7 @@
                     <input type="password" id="password" class="form-control">
                   </div>
                   <div class="text-center">
-                    <button type="button" onclick="login()"  class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                    <button type="button" onclick="login()" id="login-button"  class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                   </div>
                   <p class="mt-4 text-sm text-center">
                     Don't have an account?
@@ -162,7 +156,12 @@
         responseData = JSON.parse(request.responseText)
         if(responseData['response'] == 'success')
         {
-          window.location.href="/"
+          button = document.getElementById('login-button')
+          button.classList.add('disabled')
+            setTimeout(function()
+            {
+              window.location.href="/"
+            }, 2000)
         }
         else{
           alert("Login Failed1!")

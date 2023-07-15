@@ -75,7 +75,7 @@ else{
             <div class="col-14">
             <div class="d-flex justify-content-around bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-4">
                 <h4 class="text-white text-capitalize pt-2">Products</h4>
-                <a class="btn bg-gradient-dark" href="javascript:;"><i class="material-icons">add</i>&nbsp;&nbsp;Add New Product</a>
+                <a class="btn bg-gradient-dark" href="/create_product"><i class="material-icons">add</i>&nbsp;&nbsp;Add New Product</a>
               </div>
               <div class="album py-5">
         <div class="container">

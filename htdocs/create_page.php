@@ -2,6 +2,34 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
 
+if (session::get('session_token')) {
+
+  $session_token = session::get('session_token');
+  usersession::authorize($session_token);
+  usersession::isValid($session_token);
+  $id = session::get('user_id');
+  $userobj = new user($id);
+
+
+if (isset($_GET['signout'])) {
+
+  session::destroy();
+  header('Location:  /users/login');
+
+}
+
+if(isset($_GET['signout_all']))
+{
+user::signout_all($userobj->id);
+session::destroy();
+header('Location: /users/login');
+}
+
+}
+else{
+  header('Location: /users/login');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

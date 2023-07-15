@@ -9,7 +9,7 @@ class usersession
 
             $conn = database::getConnection();
 
-            $sql = "SELECT * FROM `users` WHERE `username` = '$user'";
+            $sql = "SELECT * FROM `users` WHERE `username` = '$user' OR `email` = '$user'";
 
             $result1 = $conn->query($sql);
             if($result1->num_rows == 1)
@@ -19,7 +19,7 @@ class usersession
             }
             else
             {
-                die("Invalid user");
+                return false;
             }
             $userobj = new user($uid);
             $username = $userobj->username;
@@ -67,7 +67,7 @@ class usersession
             $session_useragent = $row['user_agent'];
         } else {
             session::unset_all();
-            die('<pre>Session Token not found from database. Try clearing your cookies and Login again :) <a href="../login">Login</a></pre>');
+            die();
         }
 
         if ($host_ip == $session_ip and $host_useragent == $session_useragent) {
@@ -78,7 +78,7 @@ class usersession
             $conn->query($sql);
             session::destroy();
             session::unset_all();
-            die('<pre>You hijacked this session by copying someones cookies, Session Destroyed.<a href="../login">Login</a></pre>');
+            die();
 
         }
 
@@ -101,8 +101,7 @@ class usersession
             $this->ip = $row['user_ip'];
             $this->user_agent = $row['user_agent'];
         } else {
-            echo "Session is invalid. Please try to login again.";
-            throw new Exception("Session token is invalid. Try to login again.");
+           return false;
         }
 
     }
@@ -117,7 +116,7 @@ class usersession
             if ($result->num_rows == 1) {
                 return true;
             } else {
-                die("Session is invalid. Try to login again.");
+               return false;
             }
 
         }

@@ -70,7 +70,7 @@ else{
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="d-flex justify-content-around bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-4">
                 <h4 class="text-white text-capitalize pt-2">Pages</h4>
-                <a class="btn bg-gradient-dark" href="javascript:;"><i class="material-icons">add</i>&nbsp;&nbsp;Add New Page</a>
+                <a class="btn bg-gradient-dark" href="/create_page"><i class="material-icons">add</i>&nbsp;&nbsp;Add New Page</a>
               </div>
             </div>
             <div class="card-body px-0 pb-2">

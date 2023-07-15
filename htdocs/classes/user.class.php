@@ -60,16 +60,13 @@ class user
             $this->id = $row['id'];
             $this->name = $row['name'];
             $this->username = $row['username'];
-            $this->age = $row['age'];
-            $this->gender = $row['gender'];
-            $this->dob = $row['dob'];
             $this->email = $row['email'];
             $this->phone = $row['phone'];
             $this->reg_id = $row['reg_id'];
 
         } else {
 
-            die("Invalid Username");
+            die();
 
         }
     }
