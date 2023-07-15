@@ -34,26 +34,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
 <?load_template('nav')?>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
-      <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
-          </ol>
-          <h6 class="font-weight-bolder mb-0">Dashboard</h6>
-        </nav>
-            <li class="nav-item d-flex align-items-center">
-              <a href="/profile" class="nav-link text-body font-weight-bold px-0">
-                <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- End Navbar -->
+<?load_template('head')?>
       <div class="card card-body">
         
           <div class="col-8">      
@@ -65,7 +46,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
             <div class="col-14">
             <div class="d-flex justify-content-around bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-4">
                 <h4 class="text-white text-capitalize pt-2">Posts</h4>
-                <a class="btn bg-gradient-dark" href="javascript:;"><i class="material-icons">add</i>&nbsp;&nbsp;Add New Menu</a>
+                <a class="btn bg-gradient-dark" href="javascript:;"><i class="material-icons">add</i>&nbsp;&nbsp;Add New Post</a>
               </div>
               <div class="album py-5">
         <div class="container">
@@ -78,8 +59,12 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
                     </div>
                     <small class="text-muted">9 mins</small>
                   </div>
@@ -93,8 +78,12 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
                     </div>
                     <small class="text-muted">9 mins</small>
                   </div>
@@ -108,8 +97,12 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
                     </div>
                     <small class="text-muted">9 mins</small>
                   </div>
@@ -124,8 +117,12 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
                     </div>
                     <small class="text-muted">9 mins</small>
                   </div>
@@ -139,8 +136,12 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
                     </div>
                     <small class="text-muted">9 mins</small>
                   </div>
@@ -154,8 +155,12 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
                     </div>
                     <small class="text-muted">9 mins</small>
                   </div>
@@ -170,8 +175,12 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
                     </div>
                     <small class="text-muted">9 mins</small>
                   </div>
@@ -185,8 +194,12 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
                     </div>
                     <small class="text-muted">9 mins</small>
                   </div>
@@ -200,8 +213,12 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
+                        <a href="javascript:;" class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a>
                     </div>
                     <small class="text-muted">9 mins</small>
                   </div>

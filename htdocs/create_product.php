@@ -12,7 +12,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
   <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <title>
-    Update Product - CMS
+    Create Product - CMS
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -42,7 +42,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
             <div class="card z-index-0 fadeIn3 fadeInBottom">
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="d-flex justify-content-around bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                  <h4 class="text-white font-weight-bolder pr-10 mt-1 mb-0">Update Product</h4>
+                  <h4 class="text-white font-weight-bolder pr-10 mt-1 mb-0">Create Product</h4>
                  <p></p>
                 </div>
               </div>
@@ -62,7 +62,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                   </div>
 
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Update Product</button>
+                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Create Product</button>
 </div>
                 </form>
               </div>

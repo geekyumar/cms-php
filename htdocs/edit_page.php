@@ -12,7 +12,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
   <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <title>
-    Update Product - CMS
+    Update Page - CMS
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -34,7 +34,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
 <?load_template('nav')?>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <?load_template('head')?>
+   <?load_template('head')?>
 
     <div class="container my-auto">
         <div class="row">
@@ -42,28 +42,31 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
             <div class="card z-index-0 fadeIn3 fadeInBottom">
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="d-flex justify-content-around bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                  <h4 class="text-white font-weight-bolder pr-10 mt-1 mb-0">Update Product</h4>
+                  <h4 class="text-white font-weight-bolder pr-10 mt-1 mb-0">Update Page</h4>
                  <p></p>
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start" id="myForm">
-                  <div class="input-group input-group-outline my-3">
-                    <p class="text-primary pt-2 text-gradient font-weight-bold">Select your image :</p>
-                    <input type="file" id="photo" class="form-control">
+                  <div class="input-group input-group-outline mb-3">
+                    <label class="form-label">Page Name</label>
+                    <input type="text" id="page-name" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Product Name</label>
-                    <input type="password" id="password" class="form-control">
+                    <label class="form-label">Page Heading</label>
+                    <input type="text" id="page-heading" rows="8" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Product Description</label>
-                    <textarea type="password" id="password" rows="8" class="form-control"></textarea>
+                    <label class="form-label">Page Subheading</label>
+                    <textarea type="text" id="page-subheading" rows="4" class="form-control"></textarea>
+                  </div>
+                  <div class="input-group input-group-outline mb-3">
+                    <label class="form-label">Page Content</label>
+                    <textarea type="text" id="page-content" rows="8" class="form-control"></textarea>
                   </div>
 
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Update Product</button>
-</div>
+                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Update Page</button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -79,7 +82,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
-      <script src="/assets/js/core/popper.min.js"></script>
+  <script src="/assets/js/core/popper.min.js"></script>
   <script src="/assets/js/core/bootstrap.min.js"></script>
   <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>

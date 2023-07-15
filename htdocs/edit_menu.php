@@ -12,9 +12,9 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
   <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <title>
-    Update Product - CMS
+    Edit Menu - CMS
   </title>
-  <!--     Fonts and icons     -->
+  <!--     Fonts and icons -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
   <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
@@ -35,6 +35,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <?load_template('head')?>
+    <!-- End Navbar -->
 
     <div class="container my-auto">
         <div class="row">
@@ -42,28 +43,23 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
             <div class="card z-index-0 fadeIn3 fadeInBottom">
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="d-flex justify-content-around bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                  <h4 class="text-white font-weight-bolder pr-10 mt-1 mb-0">Update Product</h4>
+                  <h4 class="text-white font-weight-bolder pr-10 mt-1 mb-0">Update Menu</h4>
                  <p></p>
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start" id="myForm">
-                  <div class="input-group input-group-outline my-3">
-                    <p class="text-primary pt-2 text-gradient font-weight-bold">Select your image :</p>
-                    <input type="file" id="photo" class="form-control">
+                  <div class="input-group input-group-outline mb-3">
+                    <label class="form-label">Menu name</label>
+                    <input type="text" id="menu-name" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Product Name</label>
-                    <input type="password" id="password" class="form-control">
-                  </div>
-                  <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Product Description</label>
-                    <textarea type="password" id="password" rows="8" class="form-control"></textarea>
+                    <label class="form-label">Menu Link</label>
+                    <textarea type="text" id="menu-link" rows="8" class="form-control"></textarea>
                   </div>
 
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Update Product</button>
-</div>
+                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Update Menu</button>
+                  </div>
                 </form>
               </div>
             </div>
