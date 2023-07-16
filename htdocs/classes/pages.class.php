@@ -2,7 +2,7 @@
 
 class pages
 {
-    public static function create($menu_name, $menu_link, $token, $uid)
+    public static function create($page_name, $page_heading, $page_subheading, $page_content, $token, $uid)
     {
         if(usersession::authorize($token) === true)
         {
@@ -11,10 +11,10 @@ class pages
             $conn = database::getConnection();
         }
        
-        $menu_id = md5(rand(0,9999). $menu_name . $menu_link . $uid);
+        $page_id = md5(rand(0,9999). $page_name . $page_heading . $page_content. $uid);
 
-        $sql = "INSERT INTO `menu` (`uid`, `menu_id`, `menu_name`, `menu_link`, `menu_create_time`) 
-            VALUES ('$uid', '$menu_id', '$menu_name', '$menu_link', now())";
+        $sql = "INSERT INTO `pages` (`uid`, `page_id`, `page_name`, `page_heading`, `page_subheading`, `page_content`, `page_create_time`) 
+            VALUES ('$uid', '$page_id', '$page_name', '$page_heading', '$page_subheading', '$page_content', now())";
 
         if($conn->query($sql) == true)
         {
@@ -39,14 +39,14 @@ class pages
             $conn = database::getConnection();
         }
 
-        $sql = "SELECT * FROM `menu` WHERE `uid` = '$uid'";
+        $sql = "SELECT * FROM `pages` WHERE `uid` = '$uid'";
         $result = $conn->query($sql);
 
         if($result)
         {
             if($result->num_rows)
             {
-                return $result->fetch_assoc();
+                return $result;
             }
             else{
                 return 0;
@@ -62,7 +62,7 @@ class pages
         }
     }
 
-    public static function update($menu_name, $menu_link, $token, $uid)
+    public static function edit($page_id, $page_name, $page_heading, $page_subheading, $page_content, $token, $uid)
     {
         if(usersession::authorize($token) === true)
         {
@@ -71,10 +71,12 @@ class pages
             $conn = database::getConnection();
         }
 
-        $sql = "UPDATE `menu` SET
-        `menu_name` = '$menu_name',
-        `menu_link` = '$menu_link',
-        WHERE `uid` = '$uid'";
+        $sql = "UPDATE `pages` SET
+        `page_name` = '$page_name',
+        `page_heading` = '$page_heading',
+        `page_subheading` = '$page_subheading',
+        `page_content` = '$page_content'
+        WHERE `page_id` = '$page_id' AND `uid` = '$uid'";
 
         if($conn->query($sql) === true)
         {
@@ -89,7 +91,7 @@ class pages
         }
     }
 
-    public static function delete($menu_id, $token)
+    public static function delete($page_id, $token)
     {
         if(usersession::authorize($token) === true)
         {
@@ -98,8 +100,8 @@ class pages
             $conn = database::getConnection();
         }
 
-        $sql = "DELETE FROM `menu`
-        WHERE ((`menu_id` = '$menu_id'))";
+        $sql = "DELETE FROM `pages`
+        WHERE ((`page_id` = '$page_id'))";
 
         if($conn->query($sql) === true)
         {

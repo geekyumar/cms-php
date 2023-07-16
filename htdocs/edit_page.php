@@ -2,6 +2,44 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
 
+if (session::get('session_token')) {
+
+  $session_token = session::get('session_token');
+  usersession::authorize($session_token);
+  usersession::isValid($session_token);
+  $uid = session::get('user_id');
+  $userobj = new user($uid);
+
+  if(isset($_GET['page_id']))
+{
+  $page_id = $_GET['page_id'];
+  $conn = database::getConnection();
+
+  $sql = "SELECT * FROM `pages` WHERE `uid` = '$uid' AND `page_id` = '$page_id'";
+  $result = $conn->query($sql);
+
+  if($result->num_rows == 1)
+  {
+    $row = $result->fetch_assoc();
+  }
+  else
+  {
+    die("<pre>Invalid page ID. go <a href='../'>back</a></pre>");
+  }
+
+}
+else{
+  die("<pre>Enter Valid page ID, or go <a href='../'>back</a></pre>");
+}
+
+}
+
+
+else{
+  header('Location: /users/login');
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,23 +87,23 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
               <div class="card-body">
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Page Name</label>
-                    <input type="text" id="page-name" class="form-control">
+                    <input type="text" value="<?echo $row['page_name']?>" id="page-name" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Page Heading</label>
-                    <input type="text" id="page-heading" rows="8" class="form-control">
+                    <input type="text" value="<?echo $row['page_heading']?>" id="page-heading" rows="8" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Page Subheading</label>
-                    <textarea type="text" id="page-subheading" rows="4" class="form-control"></textarea>
+                    <input type="text" value="<?echo $row['page_subheading']?>" id="page-subheading" rows="4" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Page Content</label>
-                    <textarea type="text" id="page-content" rows="8" class="form-control"></textarea>
+                    <input type="text" value="<?echo $row['page_content']?>" id="page-content" rows="8" class="form-control">
                   </div>
-
+                  <input type="hidden" id="page-id" value="<?echo $row['page_id']?>">
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Update Page</button>
+                    <button type="button" onclick="edit()" class="btn bg-gradient-primary w-100 my-4 mb-2">Update Page</button>
                   </div>
                 </form>
               </div>
@@ -82,6 +120,55 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+
+<script>
+
+function edit() { 
+    var page_id = document.getElementById('page-id').value
+    var page_name = document.getElementById('page-name').value
+    var page_heading = document.getElementById('page-heading').value
+    var page_subheading = document.getElementById('page-subheading').value
+    var page_content = document.getElementById('page-content').value
+
+    var request = new XMLHttpRequest();
+    request.open('POST', '/api/pages/editpage.api.php', true)
+    
+    request.setRequestHeader('Content-type', 'application/json')
+
+    var data = {
+      page_id:page_id,
+      page_name:page_name,
+      page_heading:page_heading,
+      page_subheading:page_subheading,
+      page_content:page_content
+    }
+    requestData = JSON.stringify(data)
+    console.log(requestData)
+
+    request.onload = function()
+    {
+      if(request.status === 200)
+      {
+        responseData = JSON.parse(request.responseText)
+        if(responseData['response'] == 'success')
+        {
+          window.location.href="/pages"
+          alert("Page Updated!")
+        }
+        else{
+          alert("Update page Failed!")
+        } 
+      }
+      else{
+        alert("Update page Failed!")
+      }
+    }
+    
+    request.send(requestData)
+  }
+
+</script>
+
   <script src="/assets/js/core/popper.min.js"></script>
   <script src="/assets/js/core/bootstrap.min.js"></script>
   <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>

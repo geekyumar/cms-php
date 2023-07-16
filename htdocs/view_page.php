@@ -2,6 +2,44 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
 
+if (session::get('session_token')) {
+
+  $session_token = session::get('session_token');
+  usersession::authorize($session_token);
+  usersession::isValid($session_token);
+  $uid = session::get('user_id');
+  $userobj = new user($uid);
+
+  if(isset($_GET['page_id']))
+{
+  $page_id = $_GET['page_id'];
+  $conn = database::getConnection();
+
+  $sql = "SELECT * FROM `pages` WHERE `uid` = '$uid' AND `page_id` = '$page_id'";
+  $result = $conn->query($sql);
+
+  if($result->num_rows == 1)
+  {
+    $row = $result->fetch_assoc();
+  }
+  else
+  {
+    die("<pre>Invalid page ID. go <a href='../'>back</a></pre>");
+  }
+
+}
+else{
+  die("<pre>Enter Valid page ID, or go <a href='../'>back</a></pre>");
+}
+
+}
+
+
+else{
+  header('Location: /users/login');
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,9 +76,10 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
     <!-- End Navbar -->
       <div class="card card-body">       
           <main role="main" class="container">
-      <h1 class="mt-5">Sticky footer</h1>
-      <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS.</p>
-      <p>Use <a href="../sticky-footer-navbar/">the sticky footer with a fixed navbar</a> if need be, too.</p>
+          <p class="lead">Page Name: <?echo $row['page_name']?></p>
+      <h1 class="mt-5"><?echo $row['page_heading']?></h1>
+      <p class="lead"><?echo $row['page_subheading']?></p>
+      <p><?echo $row['page_content']?></p>
     </main>
           </div>
        

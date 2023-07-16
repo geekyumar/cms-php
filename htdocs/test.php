@@ -1,5 +1,7 @@
 <?php
 
 include_once ('/var/www/cms-php/htdocs/classes/main.php');
+$token = session::get('session_token');
+$uid = session::get('user_id');
 
-user::signup('Umar', 'umar', 'umar@example.com', '312343', 'pass', '12');
+pages::edit('d8c99af9ec9f3a621c65b7fd40ca406a','fedwegghjtgrreeerererererereegredfre','frewefgrferetererererererfrghtrfrew','frewfftgrferererererergrfew', 'gterewdeerererererererfrrfwefrgtre', $token, $uid);

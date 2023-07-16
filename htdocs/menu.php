@@ -161,7 +161,7 @@ function deleteMenu(id) {
   if(confirm("Are you sure to delete menu?"))
   { 
     var request = new XMLHttpRequest();
-    request.open('POST', '/api/deletemenu.api.php', true)
+    request.open('POST', '/api/menu/deletemenu.api.php', true)
     
     request.setRequestHeader('Content-type', 'application/json')
 

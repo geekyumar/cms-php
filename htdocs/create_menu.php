@@ -111,7 +111,7 @@ function create() {
     var menu_link = document.getElementById('menu-link').value
 
     var request = new XMLHttpRequest();
-    request.open('POST', '/api/createmenu.api.php', true)
+    request.open('POST', '/api/menu/createmenu.api.php', true)
     
     request.setRequestHeader('Content-type', 'application/json')
 

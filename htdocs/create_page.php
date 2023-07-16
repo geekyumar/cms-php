@@ -85,15 +85,15 @@ else{
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Page Subheading</label>
-                    <textarea type="text" id="page-subheading" rows="4" class="form-control"></textarea>
+                    <input type="text" id="page-subheading" rows="4" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Page Content</label>
-                    <textarea type="text" id="page-content" rows="8" class="form-control"></textarea>
+                    <input type="text" id="page-content" rows="8" class="form-control">
                   </div>
 
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Create Page</button>
+                    <button type="button" onclick="create()" class="btn bg-gradient-primary w-100 my-4 mb-2">Create Page</button>
                   </div>
                 </form>
               </div>
@@ -101,6 +101,51 @@ else{
           </div>
         </div>
       </div>
+
+      <script>
+
+function create() { 
+    var page_name = document.getElementById('page-name').value
+    var page_heading = document.getElementById('page-heading').value
+    var page_subheading = document.getElementById('page-subheading').value
+    var page_content = document.getElementById('page-content').value
+
+    var request = new XMLHttpRequest();
+    request.open('POST', '/api/pages/createpage.api.php', true)
+    
+    request.setRequestHeader('Content-type', 'application/json')
+
+    var data = {
+      page_name:page_name,
+      page_heading:page_heading,
+      page_subheading:page_subheading,
+      page_content:page_content
+    }
+    requestData = JSON.stringify(data)
+
+    request.onload = function()
+    {
+      if(request.status === 200)
+      {
+        responseData = JSON.parse(request.responseText)
+        if(responseData['response'] == 'success')
+        {
+          window.location.href="/pages"
+          alert("Page Created!")
+        }
+        else{
+          alert("Create Page Failed!")
+        } 
+      }
+      else{
+        alert("Create Page Failed!")
+      }
+    }
+    
+    request.send(requestData)
+  }
+  </script>
+
       <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -109,6 +154,7 @@ else{
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+
   </script>
   <script src="/assets/js/core/popper.min.js"></script>
   <script src="/assets/js/core/bootstrap.min.js"></script>

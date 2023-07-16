@@ -122,7 +122,7 @@ function edit() {
     var menu_id = document.getElementById('menu-id').value
 
     var request = new XMLHttpRequest();
-    request.open('POST', '/api/editmenu.api.php', true)
+    request.open('POST', '/api/menu/editmenu.api.php', true)
     
     request.setRequestHeader('Content-type', 'application/json')
 
