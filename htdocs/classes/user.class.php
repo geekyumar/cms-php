@@ -11,8 +11,8 @@ class user
 
         $sql1 = "SET @@session.time_zone = '+05:30'";
 
-        $sql2 = "INSERT INTO `users` (`name`,`username`, `email`,`phone`,`password`,`reg_id`)
-    VALUES ('$name','$username', '$email', '$phone', '$password', '$regid')";
+        $sql2 = "INSERT INTO `users` (`name`,`username`, `email`,`phone`,`password`,`reg_id`, `signup_time`)
+    VALUES ('$name','$username', '$email', '$phone', '$password', '$regid', now())";
 
         if ($conn->query($sql1) and $conn->query($sql2) === true) {
              return true;

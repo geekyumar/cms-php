@@ -128,6 +128,7 @@ function create() {
         responseData = JSON.parse(request.responseText)
         if(responseData['response'] == 'success')
         {
+          window.location.href="/menu"
           alert("Menu Created!")
         }
         else{

@@ -2,6 +2,43 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
 
+if (session::get('session_token')) {
+
+  $session_token = session::get('session_token');
+  usersession::authorize($session_token);
+  usersession::isValid($session_token);
+  $uid = session::get('user_id');
+  $userobj = new user($uid);
+
+  if(isset($_GET['menu_id']))
+{
+  $menu_id = $_GET['menu_id'];
+  $conn = database::getConnection();
+
+  $sql = "SELECT * FROM `menu` WHERE `uid` = '$uid' AND `menu_id` = '$menu_id'";
+  $result = $conn->query($sql);
+
+  if($result->num_rows == 1)
+  {
+    $row = $result->fetch_assoc();
+  }
+  else
+  {
+    die("<pre>Invalid Menu ID. go <a href='../'>back</a></pre>");
+  }
+
+}
+else{
+  die("<pre>Enter Valid Menu ID, or go <a href='../'>back</a></pre>");
+}
+
+}
+
+
+else{
+  header('Location: /users/login');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,15 +87,16 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
               <div class="card-body">
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Menu name</label>
-                    <input type="text" id="menu-name" class="form-control">
+                    <input type="text" value="<?echo $row['menu_name']?>" id="menu-name" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Menu Link</label>
-                    <textarea type="text" id="menu-link" rows="8" class="form-control"></textarea>
+                    <input type="text" value="<?echo $row['menu_link']?>" id="menu-link" rows="8" class="form-control">
                   </div>
+                  <input type="hidden" value="<?echo $menu_id?>" id="menu-id" rows="8" class="form-control">
 
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Update Menu</button>
+                    <button type="button" onclick="edit()" class="btn bg-gradient-primary w-100 my-4 mb-2">Update Menu</button>
                   </div>
                 </form>
               </div>
@@ -75,6 +113,49 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+
+<script>
+
+function edit() { 
+    var menu_name = document.getElementById('menu-name').value
+    var menu_link = document.getElementById('menu-link').value
+    var menu_id = document.getElementById('menu-id').value
+
+    var request = new XMLHttpRequest();
+    request.open('POST', '/api/editmenu.api.php', true)
+    
+    request.setRequestHeader('Content-type', 'application/json')
+
+    var data = {
+      menu_name:menu_name,
+      menu_link:menu_link,
+      menu_id:menu_id
+    }
+    requestData = JSON.stringify(data)
+
+    request.onload = function()
+    {
+      if(request.status === 200)
+      {
+        responseData = JSON.parse(request.responseText)
+        if(responseData['response'] == 'success')
+        {
+          window.location.href="/menu"
+          alert("Menu Updated!")
+        }
+        else{
+          alert("Update Menu Failed!")
+        } 
+      }
+      else{
+        alert("Update Menu Failed!")
+      }
+    }
+    
+    request.send(requestData)
+  }
+
+</script>
       <script src="/assets/js/core/popper.min.js"></script>
   <script src="/assets/js/core/bootstrap.min.js"></script>
   <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>

@@ -46,7 +46,7 @@ class menu
         {
             if($result->num_rows)
             {
-                return $result->fetch_assoc();
+                return $result;
             }
             else{
                 return 0;
@@ -62,7 +62,7 @@ class menu
         }
     }
 
-    public static function update($menu_name, $menu_link, $token, $uid)
+    public static function edit($menu_id, $menu_name, $menu_link, $token, $uid)
     {
         if(usersession::authorize($token) === true)
         {
@@ -73,8 +73,8 @@ class menu
 
         $sql = "UPDATE `menu` SET
         `menu_name` = '$menu_name',
-        `menu_link` = '$menu_link',
-        WHERE `uid` = '$uid'";
+        `menu_link` = '$menu_link'
+        WHERE `menu_id` = '$menu_id' AND `uid` = '$uid'";
 
         if($conn->query($sql) === true)
         {
@@ -89,7 +89,7 @@ class menu
         }
     }
 
-    public static function delete($menu_id, $token)
+    public static function delete($menu_id, $token, $uid,)
     {
         if(usersession::authorize($token) === true)
         {
@@ -99,7 +99,7 @@ class menu
         }
 
         $sql = "DELETE FROM `menu`
-        WHERE ((`menu_id` = '$menu_id'))";
+        WHERE ((`menu_id` = '$menu_id')) AND `uid` = '$uid'";
 
         if($conn->query($sql) === true)
         {

@@ -67,7 +67,7 @@ class usersession
             $session_useragent = $row['user_agent'];
         } else {
             session::unset_all();
-            die();
+            header('Location: /users/login');
         }
 
         if ($host_ip == $session_ip and $host_useragent == $session_useragent) {
@@ -78,7 +78,7 @@ class usersession
             $conn->query($sql);
             session::destroy();
             session::unset_all();
-            die();
+            header('Location: /users/login');
 
         }
 
