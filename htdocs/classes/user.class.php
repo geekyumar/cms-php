@@ -62,6 +62,7 @@ class user
             $this->username = $row['username'];
             $this->email = $row['email'];
             $this->phone = $row['phone'];
+            $this->signup_time = $row['signup_time'];
             $this->reg_id = $row['reg_id'];
 
         } else {

@@ -11,10 +11,15 @@ $uid = session::get('user_id');
 if(isset($token) && isset($uid))
 { 
 
-if(isset($data['post_id'])) 
+if(isset($data['product_id']) and 
+   isset($data['product_name']) and 
+   isset($data['product_description'])) 
 {
-    $post_id = $data['post_id'];
-    $result = posts::delete($post_id, $token, $uid);
+    $product_id = $data['product_id'];
+    $product_name = $data['product_name'];
+    $product_description = $data['product_description'];
+
+    $result = products::edit($product_id, $product_name, $product_description, $token, $uid);
     if($result)
     {
         $responseArray = [

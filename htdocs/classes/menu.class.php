@@ -113,4 +113,19 @@ class menu
            echo ("Unauthorized API request detected!");
         }
     }
+
+    public static function no_of_menu($uid)
+    {
+        if(!$conn)
+        {
+            $conn = database::getConnection();
+        }
+        
+        $sql = "SELECT * FROM `menu` WHERE `uid` = '$uid'";
+        $result = $conn->query($sql);
+        if($result)
+        {
+           echo $result->num_rows;
+        }
+    }
 }

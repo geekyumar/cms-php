@@ -8,15 +8,15 @@ if(session::get('session_token'))
 $token = session::get('session_token');
 $uid = session::get('user_id');
 
-if(isset($_FILES['post_image']['name']) and
-isset($_POST['post_name']) and 
-isset($_POST['post_description']) 
+if(isset($_FILES['product_image']['name']) and
+    isset($_POST['product_name']) and 
+    isset($_POST['product_description']) 
 )
 
 {
-    $post_image = $_FILES['post_image']['name'];
-    $post_name = $_POST['post_name'];
-    $post_description = $_POST['post_description'];
+    $product_image = $_FILES['product_image']['name'];
+    $product_name = $_POST['product_name'];
+    $product_description = $_POST['product_description'];
 
   if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     die("Page Unavailable");
@@ -26,17 +26,9 @@ if (empty($_FILES)) {
     ?><script>alert('No files uploaded. Please fill the form again.')</script><?
 }
 
-$file_type = $_FILES['post_image']['type'];
-if($file_type !== 'image/jepg' &&
-$file_type !== 'image/jpg' &&
-$file_type !== 'image/png')
-{ 
-     die('Invalid image format or file format not supported!');
- }
+if ($_FILES['product_image']["error"] !== UPLOAD_ERR_OK) {
 
-if ($_FILES['post_image']["error"] !== UPLOAD_ERR_OK) {
-
-    switch ($_FILES['post_image']["error"]) {
+    switch ($_FILES['product_image']["error"]) {
         case UPLOAD_ERR_PARTIAL:
             ?><script>alert('File only partially uploaded.')</script><?
             break;
@@ -62,36 +54,44 @@ if ($_FILES['post_image']["error"] !== UPLOAD_ERR_OK) {
 
             break;
         default:
-        ?><script>alert('Unknown error in Post.')</script><?
+        ?><script>alert('Unknown error in product.')</script><?
             break;
     }
 }
 
-if ($_FILES['post_image']["size"] > 2097152) {
+if ($_FILES['product_image']["size"] > 2097152) {
     ?><script>alert('File is too large. Max size allowed: 2MB')</script><?
 
 }
 
-$post_img_name = $uid . '_' . uniqid() . $post_image;
+$file_type = $_FILES['product_image']['type'];
+if($file_type !== 'image/jepg' &&
+$file_type !== 'image/jpg' &&
+$file_type !== 'image/png')
+{ 
+     die('Invalid image format or file format not supported!');
+ }
 
-$destination = $_SERVER['DOCUMENT_ROOT'] . '/assets/posts/' . $post_img_name;
+$product_img_name = $uid . '_' . uniqid() . $product_image;
+
+$destination = $_SERVER['DOCUMENT_ROOT'] . '/assets/products/' . $product_img_name;
 
 
-$result = posts::create($post_img_name, $post_name, $post_description, $token, $uid);
+$result = products::create($product_img_name, $product_name, $product_description, $token, $uid);
 
 if($result == true)
 { 
     if(
-move_uploaded_file($_FILES['post_image']["tmp_name"], $destination))
+move_uploaded_file($_FILES['product_image']["tmp_name"], $destination))
 { 
-?><script>alert('Post Created!')</script><?
-header('Location: /posts');
+?><script>alert('Product Created!')</script><?
+header('Location: /products');
 
 }
 }
 else
 {   
-    ?><script>alert('Unable to create post!')</script><?
+    ?><script>alert('Unable to create product!')</script><?
   
 }
 

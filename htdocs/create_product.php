@@ -75,22 +75,22 @@ else{
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start" id="myForm">
+                <form role="form" class="text-start" id="myForm" enctype="multipart/form-data" method="post" action="/api/products/createproduct.api.php">
                   <div class="input-group input-group-outline my-3">
                     <p class="text-primary pt-2 text-gradient font-weight-bold">Select your image :</p>
-                    <input type="file" id="photo" class="form-control">
+                    <input type="file" name="product_image" id="photo" class="form-control" >
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Product Name</label>
-                    <input type="password" id="password" class="form-control">
+                    <input type="text" name="product_name" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Product Description</label>
-                    <textarea type="password" id="password" rows="8" class="form-control"></textarea>
+                    <input type="text" name="product_description" rows="8" class="form-control">
                   </div>
 
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Create Product</button>
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Create Product</button>
 </div>
                 </form>
               </div>

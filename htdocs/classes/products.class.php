@@ -2,7 +2,7 @@
 
 class products
 {
-    public static function create($menu_name, $menu_link, $token, $uid)
+    public static function create($product_image, $product_name, $product_description, $token, $uid)
     {
         if(usersession::authorize($token) === true)
         {
@@ -11,10 +11,10 @@ class products
             $conn = database::getConnection();
         }
        
-        $menu_id = md5(rand(0,9999). $menu_name . $menu_link . $uid);
+        $product_id = md5(rand(0,9999). $product_image . $product_name . $uid);
 
-        $sql = "INSERT INTO `menu` (`uid`, `menu_id`, `menu_name`, `menu_link`, `menu_create_time`) 
-            VALUES ('$uid', '$menu_id', '$menu_name', '$menu_link', now())";
+        $sql = "INSERT INTO `products` (`uid`, `product_id`, `product_image`, `product_name`, `product_description`, `product_create_time`) 
+            VALUES ('$uid', '$product_id', '$product_image', '$product_name', '$product_description', now())";
 
         if($conn->query($sql) == true)
         {
@@ -39,14 +39,14 @@ class products
             $conn = database::getConnection();
         }
 
-        $sql = "SELECT * FROM `menu` WHERE `uid` = '$uid'";
+        $sql = "SELECT * FROM `products` WHERE `uid` = '$uid'";
         $result = $conn->query($sql);
 
         if($result)
         {
             if($result->num_rows)
             {
-                return $result->fetch_assoc();
+                return $result;
             }
             else{
                 return 0;
@@ -62,7 +62,7 @@ class products
         }
     }
 
-    public static function update($menu_name, $menu_link, $token, $uid)
+    public static function edit($product_id, $product_name, $product_description, $token, $uid)
     {
         if(usersession::authorize($token) === true)
         {
@@ -71,10 +71,10 @@ class products
             $conn = database::getConnection();
         }
 
-        $sql = "UPDATE `menu` SET
-        `menu_name` = '$menu_name',
-        `menu_link` = '$menu_link',
-        WHERE `uid` = '$uid'";
+        $sql = "UPDATE `products` SET
+        `product_name` = '$product_name',
+        `product_description` = '$product_description'
+        WHERE `uid` = '$uid' AND `product_id` = '$product_id'";
 
         if($conn->query($sql) === true)
         {
@@ -89,7 +89,7 @@ class products
         }
     }
 
-    public static function delete($menu_id, $token)
+    public static function delete($product_id, $token, $uid)
     {
         if(usersession::authorize($token) === true)
         {
@@ -98,8 +98,8 @@ class products
             $conn = database::getConnection();
         }
 
-        $sql = "DELETE FROM `menu`
-        WHERE ((`menu_id` = '$menu_id'))";
+        $sql = "DELETE FROM `products`
+        WHERE ((`product_id` = '$product_id')) AND `uid` = '$uid'";
 
         if($conn->query($sql) === true)
         {
@@ -111,6 +111,21 @@ class products
         else
         {
            echo ("Unauthorized API request detected!");
+        }
+    }
+
+    public static function no_of_products($uid)
+    {
+        if(!$conn)
+        {
+            $conn = database::getConnection();
+        }
+        
+        $sql = "SELECT * FROM `products` WHERE `uid` = '$uid'";
+        $result = $conn->query($sql);
+        if($result)
+        {
+           echo $result->num_rows;
         }
     }
 }

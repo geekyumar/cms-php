@@ -2,6 +2,43 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
 
+if (session::get('session_token')) {
+
+  $session_token = session::get('session_token');
+  usersession::authorize($session_token);
+  usersession::isValid($session_token);
+  $uid = session::get('user_id');
+  $userobj = new user($uid);
+
+  if(isset($_GET['product_id']))
+{
+  $product_id = $_GET['product_id'];
+  $conn = database::getConnection();
+
+  $sql = "SELECT * FROM `products` WHERE `uid` = '$uid' AND `product_id` = '$product_id'";
+  $result = $conn->query($sql);
+
+  if($result->num_rows == 1)
+  {
+    $row = $result->fetch_assoc();
+  }
+  else
+  {
+    die("<pre>Invalid product ID. go <a href='../'>back</a></pre>");
+  }
+
+}
+else{
+  die("<pre>Enter Valid product ID, or go <a href='../'>back</a></pre>");
+}
+
+}
+
+
+else{
+  header('Location: /users/login');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +49,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
   <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <title>
-    Update Product - CMS
+    Update product - CMS
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -24,7 +61,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
-  <link id="pagestyle" href="/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <link id="poststyle" href="/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -42,7 +79,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
             <div class="card z-index-0 fadeIn3 fadeInBottom">
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="d-flex justify-content-around bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                  <h4 class="text-white font-weight-bolder pr-10 mt-1 mb-0">Update Product</h4>
+                  <h4 class="text-white font-weight-bolder pr-10 mt-1 mb-0">Update product</h4>
                  <p></p>
                 </div>
               </div>
@@ -50,26 +87,71 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                 <form role="form" class="text-start" id="myForm">
                   <div class="input-group input-group-outline my-3">
                     <p class="text-primary pt-2 text-gradient font-weight-bold">Select your image :</p>
-                    <input type="file" id="photo" class="form-control">
+                    <input disabled type="file" value="/assets/products/<?echo $row['product_image']?>" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Product Name</label>
-                    <input type="password" id="password" class="form-control">
+                    <label class="form-label">product Name</label>
+                    <input type="text" value="<?echo $row['product_name']?>" id="product-name" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Product Description</label>
-                    <textarea type="password" id="password" rows="8" class="form-control"></textarea>
+                    <label class="form-label">product Description</label>
+                    <input type="text" value="<?echo $row['product_description']?>" id="product-description" rows="8" class="form-control">
                   </div>
-
+                  
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Update Product</button>
-</div>
+                    <button type="button" onclick="edit()" class="btn bg-gradient-primary w-100 my-4 mb-2">Update product</button>
+                  </div>
                 </form>
+                <input type="hidden" id="product-id" value="<?echo $row['product_id']?>">
               </div>
             </div>
           </div>
         </div>
       </div>
+      <script>
+
+function edit() { 
+    var product_id = document.getElementById('product-id').value
+    var product_name = document.getElementById('product-name').value
+    var product_description = document.getElementById('product-description').value
+    
+    var request = new XMLHttpRequest();
+    request.open('product', '/api/products/editproduct.api.php', true)
+    
+    request.setRequestHeader('Content-type', 'application/json')
+
+    var data = {
+      product_id:product_id,
+      product_name:product_name,
+      product_description:product_description
+    }
+    requestData = JSON.stringify(data)
+    console.log(requestData)
+
+    request.onload = function()
+    {
+      if(request.status === 200)
+      {
+        responseData = JSON.parse(request.responseText)
+        if(responseData['response'] == 'success')
+        {
+          window.location.href="/products"
+          alert("Product Updated!")
+        }
+        else{
+          alert("Update Product Failed!")
+        } 
+      }
+      else{
+        alert("Update Product Failed!")
+      }
+    }
+    
+    request.send(requestData)
+  }
+
+</script>
+
       <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
