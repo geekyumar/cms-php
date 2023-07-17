@@ -36,7 +36,7 @@ else{
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta image="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <title>
@@ -52,7 +52,7 @@ else{
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
-  <link id="pagestyle" href="/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <link id="poststyle" href="/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -75,22 +75,22 @@ else{
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start" id="myForm">
+                <form role="form" class="text-start" enctype="multipart/form-data" method="post" action="/api/posts/createpost.api.php">
                   <div class="input-group input-group-outline my-3">
                     <p class="text-primary pt-2 text-gradient font-weight-bold">Select your image :</p>
-                    <input type="file" id="photo" class="form-control">
+                    <input type="file" name="post_image" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Post Name</label>
-                    <input type="password" id="password" class="form-control">
+                    <input type="text" name="post_name" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Post Description</label>
-                    <textarea type="password" id="password" rows="8" class="form-control"></textarea>
+                    <input type="text" name="post_description" rows="8" class="form-control">
                   </div>
 
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Create Post</button>
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Create Post</button>
 </div>
                 </form>
               </div>
@@ -98,6 +98,50 @@ else{
           </div>
         </div>
       </div>
+
+      <script>
+
+function create() { 
+    var post_image = document.getElementById('post-image').value
+    var post_name = document.getElementById('post-name').value
+    var post_description = document.getElementById('post-description').value
+  
+    var request = new XMLHttpRequest();
+    request.open('POST', '/api/posts/createpost.api.php', true)
+    
+    request.setRequestHeader('Content-type', 'application/json')
+
+    var data = {
+      post_image:post_image,
+      post_name:post_name,
+      post_description:post_description
+    }
+    requestData = JSON.stringify(data)
+
+    request.onload = function()
+    {
+      if(request.status === 200)
+      {
+       console.log(request.responseText)
+      //  responseData = JSON.parse(request.responseText)
+      //   if(responseData['response'] == 'success')
+      //   {
+      //     window.location.href="/posts"
+      //     alert("Post Created!")
+      //   }
+      //   else{
+      //     alert("Create Post Failed!")
+      //   } 
+      }
+      else{
+        alert("Create Post Failed!")
+      }
+    }
+    
+    request.send(requestData)
+  }
+  </script>
+
       <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

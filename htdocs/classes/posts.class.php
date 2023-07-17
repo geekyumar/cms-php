@@ -2,7 +2,7 @@
 
 class posts
 {
-    public static function create($menu_name, $menu_link, $token, $uid)
+    public static function create($post_image, $post_name, $post_description, $token, $uid)
     {
         if(usersession::authorize($token) === true)
         {
@@ -11,10 +11,10 @@ class posts
             $conn = database::getConnection();
         }
        
-        $menu_id = md5(rand(0,9999). $menu_name . $menu_link . $uid);
+        $post_id = md5(rand(0,9999). $post_image . $post_name . $uid);
 
-        $sql = "INSERT INTO `menu` (`uid`, `menu_id`, `menu_name`, `menu_link`, `menu_create_time`) 
-            VALUES ('$uid', '$menu_id', '$menu_name', '$menu_link', now())";
+        $sql = "INSERT INTO `posts` (`uid`, `post_id`, `post_image`, `post_name`, `post_description`, `post_create_time`) 
+            VALUES ('$uid', '$post_id', '$post_image', '$post_name', '$post_description', now())";
 
         if($conn->query($sql) == true)
         {
@@ -39,7 +39,7 @@ class posts
             $conn = database::getConnection();
         }
 
-        $sql = "SELECT * FROM `menu` WHERE `uid` = '$uid'";
+        $sql = "SELECT * FROM `post` WHERE `uid` = '$uid'";
         $result = $conn->query($sql);
 
         if($result)
@@ -62,7 +62,7 @@ class posts
         }
     }
 
-    public static function update($menu_name, $menu_link, $token, $uid)
+    public static function update($post_name, $post_link, $token, $uid)
     {
         if(usersession::authorize($token) === true)
         {
@@ -71,9 +71,9 @@ class posts
             $conn = database::getConnection();
         }
 
-        $sql = "UPDATE `menu` SET
-        `menu_name` = '$menu_name',
-        `menu_link` = '$menu_link',
+        $sql = "UPDATE `post` SET
+        `post_name` = '$post_name',
+        `post_link` = '$post_link',
         WHERE `uid` = '$uid'";
 
         if($conn->query($sql) === true)
@@ -89,7 +89,7 @@ class posts
         }
     }
 
-    public static function delete($menu_id, $token)
+    public static function delete($post_id, $token)
     {
         if(usersession::authorize($token) === true)
         {
@@ -98,8 +98,8 @@ class posts
             $conn = database::getConnection();
         }
 
-        $sql = "DELETE FROM `menu`
-        WHERE ((`menu_id` = '$menu_id'))";
+        $sql = "DELETE FROM `post`
+        WHERE ((`post_id` = '$post_id'))";
 
         if($conn->query($sql) === true)
         {
