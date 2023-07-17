@@ -64,10 +64,12 @@ if ($_FILES['post_image']["size"] > 2097152) {
 
 }
 
-$destination = $_SERVER['DOCUMENT_ROOT'] . '/assets/posts/' . $uid . '_' . uniqid() . $post_image;
+$post_img_name = $uid . '_' . uniqid() . $post_image;
+
+$destination = $_SERVER['DOCUMENT_ROOT'] . '/assets/posts/' . $post_img_name;
 
 
-$result = posts::create($post_image, $post_name, $post_description, $token, $uid);
+$result = posts::create($post_img_name, $post_name, $post_description, $token, $uid);
 
 if($result == true)
 { 
@@ -81,7 +83,7 @@ header('Location: /posts');
 }
 else
 {   
-    ?><script>alert('Umable to create post!')</script><?
+    ?><script>alert('Unable to create post!')</script><?
   
 }
 

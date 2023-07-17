@@ -36,7 +36,7 @@ else{
 
 <head>
   <meta charset="utf-8" />
-  <meta image="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <title>
@@ -52,7 +52,7 @@ else{
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
-  <link id="poststyle" href="/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <link id="pagestyle" href="/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -98,50 +98,7 @@ else{
           </div>
         </div>
       </div>
-
-      <script>
-
-function create() { 
-    var post_image = document.getElementById('post-image').value
-    var post_name = document.getElementById('post-name').value
-    var post_description = document.getElementById('post-description').value
   
-    var request = new XMLHttpRequest();
-    request.open('POST', '/api/posts/createpost.api.php', true)
-    
-    request.setRequestHeader('Content-type', 'application/json')
-
-    var data = {
-      post_image:post_image,
-      post_name:post_name,
-      post_description:post_description
-    }
-    requestData = JSON.stringify(data)
-
-    request.onload = function()
-    {
-      if(request.status === 200)
-      {
-       console.log(request.responseText)
-      //  responseData = JSON.parse(request.responseText)
-      //   if(responseData['response'] == 'success')
-      //   {
-      //     window.location.href="/posts"
-      //     alert("Post Created!")
-      //   }
-      //   else{
-      //     alert("Create Post Failed!")
-      //   } 
-      }
-      else{
-        alert("Create Post Failed!")
-      }
-    }
-    
-    request.send(requestData)
-  }
-  </script>
-
       <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
