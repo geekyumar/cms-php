@@ -64,10 +64,10 @@ if ($_FILES['post_image']["size"] > 2097152) {
 
 }
 
-$destination = '/home/umarfarooq/' . $uid . '_' . uniqid() . $post_image;
+$destination = $_SERVER['DOCUMENT_ROOT'] . '/assets/posts/' . $uid . '_' . uniqid() . $post_image;
 
 
-$result = posts::create($destination, $post_name, $post_description, $token, $uid);
+$result = posts::create($post_image, $post_name, $post_description, $token, $uid);
 
 if($result == true)
 { 
@@ -75,6 +75,7 @@ if($result == true)
 move_uploaded_file($_FILES['post_image']["tmp_name"], $destination))
 { 
 ?><script>alert('Post Created!')</script><?
+header('Location: /posts');
 
 }
 }

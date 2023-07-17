@@ -1,6 +1,6 @@
 {
-    "servername" : "localhost",
-    "username" : "root",
-    "password" : "umar786*",
-    "dbname" : "cms-php"
+    "servername" : "mysql.selfmade.ninja",
+    "username" : "umarfarooq",
+    "password" : "umarfarooq",
+    "dbname" : "umarfarooq_cms"
 }

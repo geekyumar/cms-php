@@ -39,14 +39,14 @@ class posts
             $conn = database::getConnection();
         }
 
-        $sql = "SELECT * FROM `post` WHERE `uid` = '$uid'";
+        $sql = "SELECT * FROM `posts` WHERE `uid` = '$uid'";
         $result = $conn->query($sql);
 
         if($result)
         {
             if($result->num_rows)
             {
-                return $result->fetch_assoc();
+                return $result;
             }
             else{
                 return 0;
@@ -62,7 +62,7 @@ class posts
         }
     }
 
-    public static function update($post_name, $post_link, $token, $uid)
+    public static function edit($post_id, $post_name, $post_description, $token, $uid)
     {
         if(usersession::authorize($token) === true)
         {
@@ -71,10 +71,10 @@ class posts
             $conn = database::getConnection();
         }
 
-        $sql = "UPDATE `post` SET
+        $sql = "UPDATE `posts` SET
         `post_name` = '$post_name',
-        `post_link` = '$post_link',
-        WHERE `uid` = '$uid'";
+        `post_description` = '$post_description'
+        WHERE `uid` = '$uid' AND `post_id` = '$post_id'";
 
         if($conn->query($sql) === true)
         {
@@ -89,7 +89,7 @@ class posts
         }
     }
 
-    public static function delete($post_id, $token)
+    public static function delete($post_id, $token, $uid)
     {
         if(usersession::authorize($token) === true)
         {
@@ -98,8 +98,8 @@ class posts
             $conn = database::getConnection();
         }
 
-        $sql = "DELETE FROM `post`
-        WHERE ((`post_id` = '$post_id'))";
+        $sql = "DELETE FROM `posts`
+        WHERE ((`post_id` = '$post_id')) AND `uid` = '$uid'";
 
         if($conn->query($sql) === true)
         {

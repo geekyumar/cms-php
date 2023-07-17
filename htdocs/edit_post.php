@@ -2,6 +2,43 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
 
+if (session::get('session_token')) {
+
+  $session_token = session::get('session_token');
+  usersession::authorize($session_token);
+  usersession::isValid($session_token);
+  $uid = session::get('user_id');
+  $userobj = new user($uid);
+
+  if(isset($_GET['post_id']))
+{
+  $post_id = $_GET['post_id'];
+  $conn = database::getConnection();
+
+  $sql = "SELECT * FROM `posts` WHERE `uid` = '$uid' AND `post_id` = '$post_id'";
+  $result = $conn->query($sql);
+
+  if($result->num_rows == 1)
+  {
+    $row = $result->fetch_assoc();
+  }
+  else
+  {
+    die("<pre>Invalid Post ID. go <a href='../'>back</a></pre>");
+  }
+
+}
+else{
+  die("<pre>Enter Valid Post ID, or go <a href='../'>back</a></pre>");
+}
+
+}
+
+
+else{
+  header('Location: /users/login');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +61,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
-  <link id="pagestyle" href="/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <link id="poststyle" href="/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -50,26 +87,71 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/classes/main.php';
                 <form role="form" class="text-start" id="myForm">
                   <div class="input-group input-group-outline my-3">
                     <p class="text-primary pt-2 text-gradient font-weight-bold">Select your image :</p>
-                    <input type="file" id="photo" class="form-control">
+                    <input disabled type="file" value="/assets/posts/<?echo $row['post_image']?>" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Post Name</label>
-                    <input type="password" id="password" class="form-control">
+                    <input type="text" value="<?echo $row['post_name']?>" id="post-name" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Post Description</label>
-                    <textarea type="password" id="password" rows="8" class="form-control"></textarea>
+                    <input type="text" value="<?echo $row['post_description']?>" id="post-description" rows="8" class="form-control">
                   </div>
-
+                  
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Update Post</button>
-</div>
+                    <button type="button" onclick="edit()" class="btn bg-gradient-primary w-100 my-4 mb-2">Update Post</button>
+                  </div>
                 </form>
+                <input type="hidden" id="post-id" value="<?echo $row['post_id']?>">
               </div>
             </div>
           </div>
         </div>
       </div>
+      <script>
+
+function edit() { 
+    var post_id = document.getElementById('post-id').value
+    var post_name = document.getElementById('post-name').value
+    var post_description = document.getElementById('post-description').value
+    
+    var request = new XMLHttpRequest();
+    request.open('POST', '/api/posts/editpost.api.php', true)
+    
+    request.setRequestHeader('Content-type', 'application/json')
+
+    var data = {
+      post_id:post_id,
+      post_name:post_name,
+      post_description:post_description
+    }
+    requestData = JSON.stringify(data)
+    console.log(requestData)
+
+    request.onload = function()
+    {
+      if(request.status === 200)
+      {
+        responseData = JSON.parse(request.responseText)
+        if(responseData['response'] == 'success')
+        {
+          window.location.href="/posts"
+          alert("Post Updated!")
+        }
+        else{
+          alert("Update Post Failed!")
+        } 
+      }
+      else{
+        alert("Update Post Failed!")
+      }
+    }
+    
+    request.send(requestData)
+  }
+
+</script>
+
       <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
