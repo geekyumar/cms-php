@@ -27,9 +27,9 @@ if (empty($_FILES)) {
 }
 
 $file_type = $_FILES['post_image']['type'];
-if($file_type !== 'image/jepg' &&
-$file_type !== 'image/jpg' &&
-$file_type !== 'image/png')
+if($file_type !== 'image/jpeg' &&
+   $file_type !== 'image/jpg' &&
+   $file_type !== 'image/png')
 { 
      die('Invalid image format or file format not supported!');
  }
@@ -84,8 +84,9 @@ if($result == true)
     if(
 move_uploaded_file($_FILES['post_image']["tmp_name"], $destination))
 { 
-?><script>alert('Post Created!')</script><?
-header('Location: /posts');
+    echo ('<script>alert("Post Created!")</script>');
+    ?><script>window.location.href="/posts"</script><?
+        
 
 }
 }

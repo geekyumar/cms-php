@@ -40,7 +40,7 @@ else{
   <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <title>
-    products - CMS
+    Products - CMS
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -120,7 +120,7 @@ for ($i=1; $i<=$result->num_rows; $i++)
 
 <div class="col-md-4">
   <div class="card mb-4 box-shadow">
-    <img class="card-img-top" src="/assets/products/<?echo $row['product_image']?>" style="height: 225px; width: 100%;">
+    <img class="card-img-top" src="/assets/products/<?echo $row['product_image']?>" style="height: 100%px; width: 100%;">
     <div class="card-body">
       <h5><?echo $row['product_name']?></h5>
       <p class="card-text"><?echo $row['product_description']?></p>
@@ -144,6 +144,7 @@ for ($i=1; $i<=$result->num_rows; $i++)
         </div>
       </div>
     </div>
+    <?load_template('footer')?>
   <!--   Core JS Files   -->
   <script src="/assets/js/core/popper.min.js"></script>
   <script src="/assets/js/core/bootstrap.min.js"></script>

@@ -65,7 +65,7 @@ if ($_FILES['product_image']["size"] > 2097152) {
 }
 
 $file_type = $_FILES['product_image']['type'];
-if($file_type !== 'image/jepg' &&
+if($file_type !== 'image/jpeg' &&
 $file_type !== 'image/jpg' &&
 $file_type !== 'image/png')
 { 
@@ -83,10 +83,9 @@ if($result == true)
 { 
     if(
 move_uploaded_file($_FILES['product_image']["tmp_name"], $destination))
-{ 
-?><script>alert('Product Created!')</script><?
-header('Location: /products');
-
+{
+    echo ('<script>alert("Product Created!")</script>');
+    ?><script>window.location.href="/products"</script><?
 }
 }
 else

@@ -119,7 +119,7 @@ else{
 
           <div class="col-md-4">
               <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="/assets/posts/<?echo $row['post_image']?>" style="height: 225px; width: 100%;">
+                <img class="card-img-top" src="/assets/posts/<?echo $row['post_image']?>" style="height: 100%; width: 100%;">
                 <div class="card-body">
                   <h5><?echo $row['post_name']?></h5>
                   <p class="card-text"><?echo $row['post_description']?></p>
@@ -143,6 +143,7 @@ else{
         </div>
       </div>
     </div>
+    <?load_template('footer')?>
   <!--   Core JS Files   -->
   <script src="/assets/js/core/popper.min.js"></script>
   <script src="/assets/js/core/bootstrap.min.js"></script>

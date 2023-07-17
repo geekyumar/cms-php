@@ -132,6 +132,51 @@ class user
         }
 
     }
+
+    public static function changePassword($old, $new, $re_enter, $token, $uid)
+    {
+        if(usersession::authorize($token) === true)
+        {
+            if(!$conn)
+        {
+            $conn = database::getConnection();
+        }
+            $sql = "SELECT `password` FROM `users` WHERE `id` = '$uid'";
+            $result = $conn->query($sql);
+            if($result)
+            {
+                $data = $result->fetch_assoc();
+                if(password_verify($old, $data['password']) === true)
+                {
+                    if($new == $re_enter)
+                    {
+                        $new_hash = password_hash($new, PASSWORD_BCRYPT);
+                        $sql1 = "UPDATE `users` SET 
+                            `password` = '$new_hash'
+                            WHERE `id` = '$uid'";
+                        $result = $conn->query($sql1);
+                        if($result)
+                        {
+                            return true;
+                        }
+                    }
+                    else{
+                       return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            echo ("Unauthorized API request detected!");
+        }
+
+}
+
 }
 
 
